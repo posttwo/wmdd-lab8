@@ -1,0 +1,27 @@
+@(productForm: Form[models.Product])
+
+@import helper._
+
+
+
+@main("Add product"){
+    <p class="lead">Add a new product</p>
+
+    @form(action=routes.HomeController.addProductSubmit() , 'class -> "form-horizontal", 'role -> "form"){
+
+        @CSRF.formField
+        
+        @inputText(productForm("name"), '_label -> "Name", 'class -> "form-control")
+        @inputText(productForm("description"), '_label -> "Description", 'class -> "form-control")
+        @inputText(productForm("stock"), '_label -> "Stock", 'class -> "form-control")
+        @inputText(productForm("price"), '_label -> "Price", 'class -> "form-control")
+
+        <div class="actions">
+            <input type="submit" value="Add Product" class="btn btn-primary">
+            <a href="@routes.HomeController.index()">
+                <button class="btn btn-warning">Cancel</button>
+            </a>
+        </div>
+
+    }
+}

@@ -1,0 +1,48 @@
+@(title: String)(content: Html) 
+
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+  <meta charset="utf-8"> 
+  <title>Online Shop - @title</title> 
+  <!-- Bootstrap Core CSS --> 
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet" />   
+  <!-- Custom CSS --> 
+  <link href="@routes.Assets.versioned("stylesheets/main.css")" rel="stylesheet" /> 
+  <link href="@routes.Assets.versioned("stylesheets/numeric.css")" rel="stylesheet" /> 
+</head> 
+
+<body> 
+  <nav class="navbar navbar-inverse"> 
+      <div class="container-fluid"> 
+          <div class="navbar-header"> 
+          <a class="navbar-brand" href="#">Online Shop</a> 
+          </div> 
+
+          <ul class="nav navbar-nav"> 
+            <li @if(title == "Products Page"){class="active"}><a href="@routes.HomeController.index()">Home</a></li>
+            <li @if(title == "Customer page"){class="active"}><a href="@routes.HomeController.customers()">Customer</a></li>
+            <li @if(title == "Services page"){class="active"}><a href="@routes.HomeController.index()">Services</a></li>
+            <li @if(title == "Contact page"){class="active"}><a href="@routes.HomeController.index()">Contact</a></li>
+            <li @if(title == "About Us"){class="active"}><a href="@routes.HomeController.index()">About</a></li>
+          </ul> 
+      </div> 
+  </nav>     
+  <container> 
+      <row> 
+          <div class="col-md-12">             
+              @content 
+          </div> 
+      </row> 
+  </container> 
+  <container> 
+      <row> 
+          <div class="col-md-12">             
+              Copyright <strong>Online Shop</strong> 
+          </div> 
+      </row> 
+  </container> 
+  <script src="@routes.Assets.versioned("javascripts/main.js")"></script>
+</body> 
+</html>

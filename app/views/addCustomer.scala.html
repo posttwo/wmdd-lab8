@@ -1,0 +1,34 @@
+@(customerForm: Form[models.Customer])
+
+@import helper._
+
+
+
+@main("Add customer"){
+    <p class="lead">Add a new customer</p>
+
+    <!--Use the views.html.helpers package to create the form -->
+    @form(action=routes.HomeController.addCustomerSubmit() , 'class -> "form-horizontal", 'role -> "form"){
+
+        @* CSRF attack prevention *@
+        @* This token, send by the controller, will be used to authenticate the form submission *@
+        @CSRF.formField
+        
+        <!--Build the form, adding an input for each field -->
+        <!-- Note the label parameter -->
+
+        @inputText(customerForm("fName"),   '_label -> "First Name", 'class -> "form-control")
+        @inputText(customerForm("lName"),   '_label -> "Last Name",  'class -> "form-control")
+        @inputText(customerForm("address"), '_label -> "Address",    'class -> "form-control")
+        
+
+        <!--Add a submit button -->
+        <div class="actions">
+            <input type="submit" value="Add Customer" class="btn btn-primary">
+            <a href="@routes.HomeController.customers()"><!--index() ??? or index -->
+                <button class="btn btn-warning">Cancel</button>
+            </a>
+        </div>
+
+    }@*End of form *@
+}@*End of page content *@

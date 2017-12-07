@@ -1,0 +1,46 @@
+@(customers: List[models.Customer])
+
+
+@main("Customer page") { 
+  <p class="lead">Product list</p> 
+
+  @if(flash.containsKey("success")){
+      <div class="alert alert-success">
+          @flash.get("success")
+      </div>
+  }
+  <table class="table table-bordered table-hover table-condensed"> 
+      <thead> 
+      <!-- The header row--> 
+      <tr> 
+          <th>ID</th> 
+          <th>First Name</th> 
+          <th>Last Name</th> 
+          <th>Address</th> 
+           
+      </tr> 
+      </thead> 
+      <tbody> 
+          <!-- Product row(s) --> 
+        @for(p<-customers){
+            <tr> 
+                <td>@p.getId</td> 
+                <td>@p.getFName</td> 
+                <td>@p.getLName</td> 
+                <td>@p.getAddress</td> 
+                <td>
+                    <a href="@routes.HomeController.deleteCustomer(p.getId)" class="btn-xs btn-danger" onclick="return confirmDel();">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td> 
+            </tr> 
+        }
+      </tbody> 
+  </table> 
+
+  <p>
+        <a href="@routes.HomeController.addCustomer()">
+            <button class="btn btn-primary">Add a customer</button>
+        </a>
+  </p>
+  }

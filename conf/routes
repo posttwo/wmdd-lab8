@@ -1,0 +1,30 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+
+GET     /customers                  controllers.HomeController.customers
+
+# Request to load the add product form ?? addproduct or addProduct 
+GET     /addproduct                 controllers.HomeController.addProduct
+
+# Data submitted by the form
+POST     /addProductSubmit                 controllers.HomeController.addProductSubmit
+
+# Request to load the add customer form
+GET     /addcustomer                 controllers.HomeController.addCustomer
+
+
+# Data submitted by the form
+POST     /addCustomerSubmit                 controllers.HomeController.addCustomerSubmit
+
+# Delete a product by an id passed as a parameter
+GET     /delProduct/:id                 controllers.HomeController.deleteProduct(id: Long)
+
+# Delete a customer by an id passed as a parameter
+GET     /delCustomer/:id                 controllers.HomeController.deleteCustomer(id: Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

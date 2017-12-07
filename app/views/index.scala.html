@@ -1,0 +1,49 @@
+@(products: List[models.Product])
+
+
+@main("Products Page") { 
+  <p class="lead">Product Catalogue</p> 
+
+    @* Display successfil new product message from flash - if set *@
+    @if(flash.containsKey("success")){
+        <div class="alert alert-success">
+            @flash.get("success")
+        </div>
+    }
+
+  <table class="table table-bordered table-hover table-condensed"> 
+      <thead> 
+      <!-- The header row--> 
+      <tr> 
+          <th>ID</th> 
+          <th>Name</th> 
+          <th>Description</th> 
+          <th>Stock</th> 
+          <th>Price</th> 
+      </tr> 
+      </thead> 
+      <tbody> 
+          <!-- Product row(s) --> 
+        @for(p<-products){
+            <tr> 
+                <td>@p.getId</td> 
+                <td>@p.getName</td> 
+                <td>@p.getDescription</td> 
+                <td>@p.getStock</td> 
+                <td id="priceAlRight">&euro; @("%.2f".format(p.getPrice))</td>
+                <!-- Delete product button-->
+                <td>
+                    <a href="@routes.HomeController.deleteProduct(p.getId)" class="btn-xs btn-danger" onclick="return confirmDel();">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr> 
+        } @* End of the loop *@
+      </tbody> 
+  </table> 
+  <p>
+        <a href="@routes.HomeController.addProduct()">
+            <button class="btn btn-primary">Add a product</button>
+        </a>
+  </p>
+  }
